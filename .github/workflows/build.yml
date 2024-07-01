@@ -1,0 +1,18 @@
+name: ci
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Get tag version
+        run: |
+          tag_name=$(echo ${{ github.ref }} | grep -o '[^/]*$')
+          echo "The tag name is $tag_name"
