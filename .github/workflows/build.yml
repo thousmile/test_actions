@@ -15,4 +15,9 @@ jobs:
       - name: Get tag version
         run: |
           tag_name=$(echo ${{ github.ref }} | grep -o '[^/]*$')
+        env:
+          tag_name: ${{ tag_name }}
+
+      - name: out tag version
+        run: |
           echo "The tag name is $tag_name"
