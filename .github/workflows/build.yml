@@ -13,11 +13,13 @@ jobs:
         uses: docker/setup-qemu-action@v3
 
       - name: Get tag version
+        id: step_one
         run: |
           tag_name=$(echo ${{ github.ref }} | grep -o '[^/]*$')
+          echo "::set-output name=tag_name::$tag_name"
         env:
           tag_name: ${{ tag_name }}
 
       - name: out tag version
         run: |
-          echo "The tag name is $tag_name"
+          echo ${{ steps.step_one.outputs.tag_name }}
